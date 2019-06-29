@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Products;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,6 +17,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'products')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'products')->dropDownList(
+            ArrayHelper::map(products::find()->all(),'ID','Name'),
+            ['prompt'=>'select product']
+
+    ) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
