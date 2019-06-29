@@ -66,7 +66,7 @@ class TicketController extends Controller
     {
         if(!Yii::$app->user->isGuest) {
             $model = new Ticket();
-
+            $model ->IdCustomer = Yii::$app->user->getId();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->ID]);
             }
