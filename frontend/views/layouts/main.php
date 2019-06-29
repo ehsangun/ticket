@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -52,6 +52,7 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[] = ['label' => 'ticket', 'url' => ['/ticket/index']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
