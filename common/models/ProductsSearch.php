@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Ticket;
+use common\models\Products;
 
 /**
- * TicketSearch represents the model behind the search form of `common\models\Ticket`.
+ * ProductsSearch represents the model behind the search form of `common\models\Products`.
  */
-class TicketSearch extends Ticket
+class ProductsSearch extends Products
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class TicketSearch extends Ticket
     public function rules()
     {
         return [
-            [['ID', 'IdCustomer', 'IdAdmin'], 'integer'],
-            [['subject', 'products', 'description', 'created_at'], 'safe'],
+            [['Id', 'Name'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class TicketSearch extends Ticket
      */
     public function search($params)
     {
-        $query = Ticket::find();
+        $query = Products::find();
 
         // add conditions that should always apply here
 
@@ -58,15 +57,9 @@ class TicketSearch extends Ticket
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID' => $this->ID,
-            'IdCustomer' => $this->IdCustomer,
-            'IdAdmin' => $this->IdAdmin,
-            'created_at' => $this->created_at,
+            'Id' => $this->Id,
+            'Name' => $this->Name,
         ]);
-
-        $query->andFilterWhere(['like', 'subject', $this->subject])
-            ->andFilterWhere(['like', 'products', $this->products])
-            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }
