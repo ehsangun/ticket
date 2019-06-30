@@ -1,12 +1,12 @@
 <?php
 
-use app\models\Products;
+use common\models\Products;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Ticket */
+/* @var $model common\models\Ticket */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -16,9 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'products')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'products')->dropDownList(
-            ArrayHelper::map(products::find()->all(),'ID','Name'),
+            ArrayHelper::map(products::find()->all(),'Id','Name'),
             ['prompt'=>'select product']
 
     ) ?>

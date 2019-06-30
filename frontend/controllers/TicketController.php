@@ -3,8 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Ticket;
-use frontend\models\TicketSearch;
+use common\models\Ticket;
+use common\models\TicketSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
