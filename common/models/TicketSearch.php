@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Ticket;
@@ -41,6 +42,7 @@ class TicketSearch extends Ticket
     public function search($params)
     {
         $query = Ticket::find();
+        $query->where('IdCustomer='.Yii::$app->user->getId());
 
         // add conditions that should always apply here
 

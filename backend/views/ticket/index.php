@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\TicketSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tickets';
+$this->title = 'All Tickets';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ticket-index">
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'answer',
             //'IdCustomer',
             //'IdAdmin',
-            //'created_at',
+            'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
