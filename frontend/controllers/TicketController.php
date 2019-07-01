@@ -81,6 +81,8 @@ class TicketController extends Controller
         if(!Yii::$app->user->isGuest) {
             $model = new Ticket();
             $model ->IdCustomer = Yii::$app->user->getId();
+            date_default_timezone_set('Asia/tehran');
+            $model->created_at = date("Y/m/d-H:i");
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->ID]);
             }
