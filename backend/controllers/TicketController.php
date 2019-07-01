@@ -1,14 +1,15 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
 use common\models\Ticket;
 use common\models\TicketSearch;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 /**
  * TicketController implements the CRUD actions for Ticket model.
@@ -29,6 +30,7 @@ class TicketController extends Controller
                         'allow' => true,
                     ],
                     [
+                        'actions' => ['logout', 'index' , 'view' , 'update' , 'create' , 'delete' ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -78,22 +80,15 @@ class TicketController extends Controller
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->isGuest) {
-            $model = new Ticket();
-            $model ->IdCustomer = Yii::$app->user->getId();
-            date_default_timezone_set('Asia/tehran');
-            $model->created_at = date("Y/m/d-H:i");
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ID]);
-            }
+        $model = new Ticket();
 
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
-        else{
-            return $this->redirect('?r=site/login');
-        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

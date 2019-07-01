@@ -1,19 +1,20 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use common\models\Ticket;
-use common\models\TicketSearch;
-use yii\filters\AccessControl;
+use common\models\Products;
+use common\models\ProductsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 /**
- * TicketController implements the CRUD actions for Ticket model.
+ * ProductsController implements the CRUD actions for Products model.
  */
-class TicketController extends Controller
+class ProductsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -44,12 +45,12 @@ class TicketController extends Controller
     }
 
     /**
-     * Lists all Ticket models.
+     * Lists all Products models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TicketSearch();
+        $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,7 +60,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Displays a single Ticket model.
+     * Displays a single Products model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -72,32 +73,25 @@ class TicketController extends Controller
     }
 
     /**
-     * Creates a new Ticket model.
+     * Creates a new Products model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->isGuest) {
-            $model = new Ticket();
-            $model ->IdCustomer = Yii::$app->user->getId();
-            date_default_timezone_set('Asia/tehran');
-            $model->created_at = date("Y/m/d-H:i");
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ID]);
-            }
+        $model = new Products();
 
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
-        else{
-            return $this->redirect('?r=site/login');
-        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Ticket model.
+     * Updates an existing Products model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,7 +102,7 @@ class TicketController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
 
         return $this->render('update', [
@@ -117,7 +111,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Deletes an existing Ticket model.
+     * Deletes an existing Products model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -131,15 +125,15 @@ class TicketController extends Controller
     }
 
     /**
-     * Finds the Ticket model based on its primary key value.
+     * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Ticket the loaded model
+     * @return Products the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Ticket::findOne($id)) !== null) {
+        if (($model = Products::findOne($id)) !== null) {
             return $model;
         }
 
