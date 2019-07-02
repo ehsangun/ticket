@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'subject',
             'products',
             'description',
-            'answer',
+//            'answer',
             //'IdCustomer',
             //'IdAdmin',
             'created_at',

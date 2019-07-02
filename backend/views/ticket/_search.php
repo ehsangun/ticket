@@ -21,9 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'products') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?php$form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'answer') ?>
+    <?php// $form->field($model, 'answer') ?>
 
     <?php // echo $form->field($model, 'IdCustomer') ?>
 
