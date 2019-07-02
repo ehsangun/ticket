@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "ticket".
@@ -14,6 +15,7 @@ use Yii;
  * @property int $IdCustomer
  * @property int $IdAdmin
  * @property string $created_at
+ * @property string isAnswered
  */
 class Ticket extends \yii\db\ActiveRecord
 {
@@ -33,6 +35,7 @@ class Ticket extends \yii\db\ActiveRecord
         return [
             [['subject', 'products', 'description'], 'required'],
             [['IdCustomer', 'IdAdmin'], 'integer'],
+            [['isAnswered'], 'boolean'],
             [['created_at'], 'safe'],
             [['subject', 'products'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 300],
@@ -52,6 +55,14 @@ class Ticket extends \yii\db\ActiveRecord
             'IdCustomer' => 'Id Customer',
             'IdAdmin' => 'Id Admin',
             'created_at' => 'Created At',
+            'isAnswered' => 'IsAnswered',
         ];
+    }
+    public function getModel($id){
+        if (($model = Ticket::findOne($id)) !== null) {
+            return $model;
+        }
+
+//        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use common\models\Ticket;
 use common\models\User;
@@ -40,7 +40,6 @@ class AnswerController extends Controller
         $searchModel = new AnswerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -69,19 +68,22 @@ class AnswerController extends Controller
     {
         $model = new Answer();
 
-        $owner=User::findIdentity(Yii::$app->user->getId());
-        $model->owner=$owner->getUsername();
+//        owner ro az role user migire
+        $user=User::findIdentity(Yii::$app->user->getId());
+        $model->owner = $user->role;
 
-        $model->created_at = date('Y-m-d H:i:s');
-
+//        idticket o az url migire
         $model->IdTicket=Yii::$app->request->get('id');
+
+        $model->created_at=date('Y-m-d H:m:s');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            $ticket=new Ticket();
-            $ticket = $ticket->getModel($model->IdTicket);
-            $ticket->isAnswered=false;
-            $ticket->save();
+        $ticket=new Ticket();
+        $ticket = $ticket->getModel($model->IdTicket);
+        $ticket->isAnswered=true;
+        $ticket->save();
 
             return $this->redirect(['view', 'id' => $model->Id]);
         }

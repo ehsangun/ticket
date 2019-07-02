@@ -51,6 +51,7 @@ class TicketSearch extends Ticket
         }
         else if($user->role=='admin'){
             $query = Ticket::find();
+
         }
 
 
