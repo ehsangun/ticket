@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\Ticket;
 use common\models\TicketSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -49,13 +51,41 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TicketSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $searchModel = new TicketSearch();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider->getModels(),
+//        ]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        $user = new User();
+        $user=User::findIdentity(Yii::$app->user->getId());
+
+
+        if($user->role=='customer') {
+                $query=Ticket::find()->where('IdCustomer='.Yii::$app->user->getId());
+             $dataProvider=new ActiveDataProvider([
+                 'query'=>$query,
+            ]);
+             $tickets=$dataProvider->getModels();
+            return $this->render('index',[
+                'tickets'=>$tickets,
+            ]);
+        }
+        else if($user->role=='admin'){
+            $query = Ticket::find()->all();
+            $dataProvider=new ActiveDataProvider([
+                'query'=>$query,
+            ]);
+            $tickets=$dataProvider->getModels();
+            return $this->render('index',[
+                'tickets'=>$tickets,
+            ]);
+        }
+
+
+
     }
 
     /**
@@ -79,20 +109,19 @@ class TicketController extends Controller
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             $model = new Ticket();
-            $model ->IdCustomer = Yii::$app->user->getId();
+            $model->IdCustomer = Yii::$app->user->getId();
             date_default_timezone_set('Asia/tehran');
             $model->created_at = date("Y/m/d-H:i");
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ID]);
+                return $this->redirect(['ticket/index']);
             }
 
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
-        else{
+        } else {
             return $this->redirect('?r=site/login');
         }
     }
@@ -147,3 +176,4 @@ class TicketController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
+
