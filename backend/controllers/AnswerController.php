@@ -70,10 +70,12 @@ class AnswerController extends Controller
 
 //        owner ro az role user migire
         $user=User::findIdentity(Yii::$app->user->getId());
-        $model->owner = $user->role;
+        $model->owner = $user->username;
 
 //        idticket o az url migire
         $model->IdTicket=Yii::$app->request->get('id');
+
+        date_default_timezone_set('Asia/tehran');
 
         $model->created_at=date('Y-m-d H:m:s');
 
