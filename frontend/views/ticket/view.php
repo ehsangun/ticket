@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
         ]) ?>
-        <?=Html::a('conversation',['answer/index','id'=> $model->ID],['class' => 'btn btn-primary'])?>
+        <?=Html::a('conversation',['answer/index','id'=>$model->ID],['class' => 'btn btn-primary'])?>
     </p>
 
     <?= DetailView::widget([

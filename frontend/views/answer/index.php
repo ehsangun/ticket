@@ -1,40 +1,41 @@
-<?php
 
+
+
+
+<?php
+use common\models\AnswerSearch;use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AnswerSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
+/* @var $answers yii\data\ActiveDataProvider */
+/* @var $newAnswer common\models\AnswerSearch */
 $this->title = 'Answers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="answer-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Answer', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'Id',
-            'message',
-            'owner',
-            'IdTicket',
-            'created_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
 
-</div>
+<?php foreach ($answers as $answer){?>
+
+    <div class="body-message text-center">
+    <div class="owner-message">
+        <?php echo $answer->owner ?>:
+    </div>
+    <div class="message">
+        <?php echo $answer->message?>
+    </div>
+    <div class="created-at">
+        created at:<?php echo $answer->created_at ?>
+        <br>
+        <br>
+        -------------
+        -------------
+
+
+    </div>
+        <div>
+
+<?php }?>
+
+            <?php echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>

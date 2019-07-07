@@ -36,9 +36,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -53,6 +51,7 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
         $menuItems[] = ['label' => 'ticket', 'url' => ['/ticket/index']];
+        $menuItems[] = ['label' => 'CreateTicket', 'url' => ['/ticket/create']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

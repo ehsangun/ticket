@@ -39,11 +39,13 @@ class AnswerController extends Controller
     {
         $searchModel = new AnswerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $answers=$dataProvider;
+        $newAnswer = new Answer();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'answers' => $answers->getModels(),
+            'newAnswer'=>$newAnswer,
         ]);
     }
 
@@ -83,7 +85,7 @@ class AnswerController extends Controller
             $ticket->isAnswered=false;
             $ticket->save();
 
-            return $this->redirect(['view', 'id' => $model->Id]);
+            return $this->redirect(['answer/index','id'=>$model->IdTicket]);
         }
 
         return $this->render('create', [
