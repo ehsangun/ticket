@@ -8,16 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="answer-form">
+<?php $form = ActiveForm::begin(); ?>
+<div class="card text-center">
+    <div class="card-header">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'message')->textarea(['maxlength' => true]) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <h1><?= $form->field($model, 'message')->textarea(['maxlength' => true]) ?></h1>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
+    <div class="card-footer bg-success">
+        <?= Html::submitButton('save', ['class' => 'btn btn-success ']) ?>
+    </div>
 </div>
+<?php ActiveForm::end(); ?>

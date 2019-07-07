@@ -7,6 +7,7 @@ use Yii;
 use common\models\Ticket;
 use common\models\TicketSearch;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -51,39 +52,35 @@ class TicketController extends Controller
      */
     public function actionIndex()
     {
-//        $searchModel = new TicketSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider->getModels(),
-//        ]);
-
-        $user = new User();
-        $user=User::findIdentity(Yii::$app->user->getId());
+        $user = User::findIdentity(Yii::$app->user->getId());
 
 
-        if($user->role=='customer') {
-                $query=Ticket::find()->where('IdCustomer='.Yii::$app->user->getId());
-             $dataProvider=new ActiveDataProvider([
-                 'query'=>$query,
+        if ($user->role == 'customer') {
+            $query = Ticket::find()->where('IdCustomer=' . Yii::$app->user->getId());
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+                'pagination'=>[
+                    'pageSize'=>3,
+                ],
             ]);
-             $tickets=$dataProvider->getModels();
-            return $this->render('index',[
-                'tickets'=>$tickets,
+
+            $tickets = $dataProvider->getModels();
+
+            return $this->render('index', [
+                'tickets' => $tickets,
+                'dataProvider'=>$dataProvider,
             ]);
-        }
-        else if($user->role=='admin'){
+        } else if ($user->role == 'admin') {
             $query = Ticket::find()->all();
-            $dataProvider=new ActiveDataProvider([
-                'query'=>$query,
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
             ]);
-            $tickets=$dataProvider->getModels();
-            return $this->render('index',[
-                'tickets'=>$tickets,
+            $tickets = $dataProvider->getModels();
+            return $this->render('index', [
+                'tickets' => $tickets,
+                'dataProvider'=>$dataProvider,
             ]);
         }
-
 
 
     }

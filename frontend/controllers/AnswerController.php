@@ -46,6 +46,7 @@ class AnswerController extends Controller
             'searchModel' => $searchModel,
             'answers' => $answers->getModels(),
             'newAnswer'=>$newAnswer,
+
         ]);
     }
 

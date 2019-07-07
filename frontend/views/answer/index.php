@@ -3,6 +3,8 @@
 
 
 <?php
+
+use common\models\Answer;
 use common\models\AnswerSearch;use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -11,6 +13,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\AnswerSearch */
 /* @var $answers yii\data\ActiveDataProvider */
 /* @var $newAnswer common\models\AnswerSearch */
+/* @var $model common\models\Answer */
 $this->title = 'Answers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php foreach ($answers as $answer){?>
 
-    <div class="body-message text-center">
-    <div class="owner-message">
+    <div class="card text-center">
+    <div class="owner-message ">
         <?php echo $answer->owner ?>:
     </div>
     <div class="message">
@@ -27,15 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="created-at">
         created at:<?php echo $answer->created_at ?>
-        <br>
-        <br>
-        -------------
-        -------------
-
-
     </div>
         <div>
 
 <?php }?>
-
+            <div class="btn btn-success">
             <?php echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>
+            </div>
