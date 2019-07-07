@@ -2,10 +2,10 @@
 
 namespace common\models;
 
+use common\models\Ticket;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Ticket;
 
 /**
  * TicketSearch represents the model behind the search form of `common\models\Ticket`.
@@ -41,7 +41,20 @@ class TicketSearch extends Ticket
      */
     public function search($params)
     {
-        $query = Ticket::find();
+        $user = new User();
+        $user=User::findIdentity(Yii::$app->user->getId());
+
+
+        if($user->role=='customer') {
+            $query = Ticket::find();
+            $query->where('IdCustomer=' . Yii::$app->user->getId());
+        }
+        else if($user->role=='admin'){
+            $query = Ticket::find();
+
+        }
+
+
 
         // add conditions that should always apply here
 

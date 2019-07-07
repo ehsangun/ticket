@@ -132,7 +132,7 @@ class TicketController extends Controller
      * @return Ticket the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Ticket::findOne($id)) !== null) {
             return $model;

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Ticket;
 use common\models\User;
 use Yii;
 use common\models\Answer;
@@ -73,7 +74,15 @@ class AnswerController extends Controller
 
         $model->created_at = date('Y-m-d H:i:s');
 
+        $model->IdTicket=Yii::$app->request->get('id');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $ticket=new Ticket();
+            $ticket = $ticket->getModel($model->IdTicket);
+            $ticket->isAnswered=false;
+            $ticket->save();
+
             return $this->redirect(['view', 'id' => $model->Id]);
         }
 

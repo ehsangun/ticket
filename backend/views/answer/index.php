@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\TicketSearch */
+/* @var $searchModel common\models\AnswerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'All Tickets';
+$this->title = 'Answers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ticket-index">
+<div class="answer-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Ticket', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Answer', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,17 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ID',
-            'subject',
-            'products',
-            'description',
-//            'answer',
-            //'IdCustomer',
-            //'IdAdmin',
+            'Id',
+            'message',
+            'owner',
+            'IdTicket',
             'created_at',
-
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+
 </div>

@@ -4,32 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\TicketSearch */
+/* @var $model common\models\AnswerSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="ticket-search">
+<div class="answer-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'ID') ?>
+    <?= $form->field($model, 'Id') ?>
 
-    <?= $form->field($model, 'subject') ?>
+    <?= $form->field($model, 'message') ?>
 
-    <?= $form->field($model, 'products') ?>
+    <?= $form->field($model, 'owner') ?>
 
-    <?php$form->field($model, 'description') ?>
+    <?= $form->field($model, 'IdTicket') ?>
 
-    <?php// $form->field($model, 'answer') ?>
-
-    <?php // echo $form->field($model, 'IdCustomer') ?>
-
-    <?php // echo $form->field($model, 'IdAdmin') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'created_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

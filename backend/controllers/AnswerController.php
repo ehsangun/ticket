@@ -1,19 +1,20 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
-use Yii;
 use common\models\Ticket;
-use common\models\TicketSearch;
-use yii\filters\AccessControl;
+use common\models\User;
+use Yii;
+use common\models\Answer;
+use common\models\AnswerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TicketController implements the CRUD actions for Ticket model.
+ * AnswerController implements the CRUD actions for Answer model.
  */
-class TicketController extends Controller
+class AnswerController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,19 +22,6 @@ class TicketController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -44,12 +32,12 @@ class TicketController extends Controller
     }
 
     /**
-     * Lists all Ticket models.
+     * Lists all Answer models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TicketSearch();
+        $searchModel = new AnswerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,7 +47,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Displays a single Ticket model.
+     * Displays a single Answer model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -69,36 +57,44 @@ class TicketController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     }
 
     /**
-     * Creates a new Ticket model.
+     * Creates a new Answer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        if(!Yii::$app->user->isGuest) {
-            $model = new Ticket();
-            $model ->IdCustomer = Yii::$app->user->getId();
-            date_default_timezone_set('Asia/tehran');
-            $model->created_at = date("Y/m/d-H:i");
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ID]);
-            }
+        $model = new Answer();
 
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+//        owner ro az role user migire
+        $user=User::findIdentity(Yii::$app->user->getId());
+        $model->owner = $user->role;
+
+//        idticket o az url migire
+        $model->IdTicket=Yii::$app->request->get('id');
+
+        $model->created_at=date('Y-m-d H:m:s');
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        $ticket=new Ticket();
+        $ticket = $ticket->getModel($model->IdTicket);
+        $ticket->isAnswered=true;
+        $ticket->save();
+
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
-        else{
-            return $this->redirect('?r=site/login');
-        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Ticket model.
+     * Updates an existing Answer model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -109,7 +105,7 @@ class TicketController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
 
         return $this->render('update', [
@@ -118,7 +114,7 @@ class TicketController extends Controller
     }
 
     /**
-     * Deletes an existing Ticket model.
+     * Deletes an existing Answer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -132,15 +128,15 @@ class TicketController extends Controller
     }
 
     /**
-     * Finds the Ticket model based on its primary key value.
+     * Finds the Answer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Ticket the loaded model
+     * @return Answer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Ticket::findOne($id)) !== null) {
+        if (($model = Answer::findOne($id)) !== null) {
             return $model;
         }
 

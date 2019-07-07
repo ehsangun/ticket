@@ -51,6 +51,8 @@ AppAsset::register($this);
             . '</li>';
         $menuItems[] = ['label' => 'Users', 'url' => ['/user/index']];
         $menuItems[] = ['label' => 'Products', 'url' => ['/products/index']];
+        $menuItems[] = ['label' => 'tickets', 'url' => ['/ticket/index']];
+        $menuItems[] = ['label' => 'answers', 'url' => ['/answer/index']];
 
     }
     echo Nav::widget([
