@@ -70,7 +70,7 @@ class AnswerController extends Controller
 
 //        owner ro az role user migire
         $user=User::findIdentity(Yii::$app->user->getId());
-        $model->owner = $user->role;
+        $model->owner = $user->username;
 
 //        idticket o az url migire
         $model->IdTicket=Yii::$app->request->get('id');
