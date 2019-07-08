@@ -64,7 +64,8 @@ class TicketController extends Controller
                 ],
                 'sort'=>[
                     'defaultOrder'=>[
-                    'isAnswered'=>SORT_ASC,
+                    'isAnswered'=>SORT_DESC,
+                        'created_at'=>SORT_DESC,
                     ]
                 ],
             ]);

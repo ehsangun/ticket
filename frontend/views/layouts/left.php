@@ -1,16 +1,38 @@
+<?php
+
+use common\models\User;
+use dmstr\widgets\Menu;
+
+?>
 <aside class="main-sidebar ">
 
     <section class="sidebar">
 
         <!-- Sidebar user panel -->
+
         <div class="user-panel">
             <div class="pull-left image">
+                <?php if(!Yii::$app->user->isGuest) {?>
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>
+                    <?php
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            $userId = Yii::$app->user->getId();
+                            $user = User::findOne($userId);
+                            echo $user->getUsername();
+                        }
+                         else { ?>
+                            <h3>مهمان</h3>
+                        <?php } ?>
+
+
+
+
+                </p>
+
+<!--                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
             </div>
         </div>
 
@@ -30,12 +52,13 @@
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+//                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => 'ساخت تیکت', 'icon' => 'file-code-o', 'url' => ['/ticket/create']],
+                    ['label' => 'تیکت ها', 'icon' => 'dashboard', 'visible' => !Yii::$app->user->isGuest,'url' => ['/ticket/index']],
+                    ['label' => 'ورود', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'ثبت نام ', 'url' => ['site/signUp'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Some tools',
+                        'label' => 'dev tools',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
@@ -63,6 +86,7 @@
                 ],
             ]
         ) ?>
+
 
     </section>
 

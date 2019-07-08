@@ -1,4 +1,6 @@
 <?php
+
+use common\models\User;
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
@@ -230,7 +232,13 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs">
+                            <?php
+
+
+                            ?>
+
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -239,7 +247,16 @@ use yii\helpers\Html;
                                  alt="User Image"/>
 
                             <p>
-                                Alexander Pierce - Web Developer
+                                <?php
+                                    if(!Yii::$app->user->isGuest) {
+                                        $userId = Yii::$app->user->getId();
+                                    $user = User::findOne($userId);
+                                    echo $user->getUsername();
+                                    }
+                                    else{
+                                        echo 'مهمان';
+                                    }
+                                ?>
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
