@@ -60,6 +60,15 @@ class TicketSearch extends Ticket
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'isAnswered' => SORT_ASC,
+
+                ]
+            ],
         ]);
 
         $this->load($params);

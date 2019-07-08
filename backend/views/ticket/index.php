@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'IdCustomer',
             //'IdAdmin',
             'created_at',
+            'isAnswered',
 
 
             ['class' => 'yii\grid\ActionColumn'],
