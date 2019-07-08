@@ -1,3 +1,8 @@
+<?php
+
+use common\models\User;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -8,7 +13,7 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= User::findIdentity(Yii::$app->user->getId())->getUsername(); ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -34,6 +39,7 @@
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Ticket', 'icon' => 'file-code-o', 'url' => ['/ticket/index'],],
+                    ['label' => 'Products', 'icon' => 'file-code-o', 'url' => ['/products/index'],],
                     ['label' => 'Answer', 'icon' => 'file-code-o', 'url' => ['/answer/index'],],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
