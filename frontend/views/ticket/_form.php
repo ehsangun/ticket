@@ -30,7 +30,9 @@ use yii\widgets\ActiveForm;
                 </div>
                 <a href="#">
                     <h1 class="card-footer">
+
                         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
                     </h1>
                 </a>
             </div>

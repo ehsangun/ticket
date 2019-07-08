@@ -41,13 +41,10 @@ class AnswerSearch extends Answer
      */
     public function search($params)
     {
-        $query = Answer::find();
-        if (User::findIdentity(Yii::$app->user->getId())->role=='admin') {
+        $query = Answer::find()->where('IdTicket=' . Yii::$app->request->get('id'));;
 
-        }else{
-            $query->where('IdTicket=' . Yii::$app->request->get('id'));
 
-        }
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

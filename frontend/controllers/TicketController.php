@@ -61,7 +61,12 @@ class TicketController extends Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination'=>[
-                    'pageSize'=>3,
+                    'pageSize'=>10,
+                ],
+                'sort'=>[
+                    'defaultOrder'=>[
+                    'isAnswered'=>SORT_ASC,
+                    ]
                 ],
             ]);
 
@@ -108,13 +113,16 @@ class TicketController extends Controller
     public function actionCreate()
     {
         if (!Yii::$app->user->isGuest) {
+
             $model = new Ticket();
             $model->IdCustomer = Yii::$app->user->getId();
             date_default_timezone_set('Asia/tehran');
             $model->created_at = date("Y/m/d-H:i");
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save())
+            {
                 return $this->redirect(['ticket/index']);
             }
+
 
             return $this->render('create', [
                 'model' => $model,
