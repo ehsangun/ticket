@@ -8,6 +8,7 @@ use common\models\Ticket;
 use common\models\TicketSearch;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

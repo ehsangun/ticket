@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Answer', ['/answer/create', 'id' => $model->ID], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->ID], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->ID], [
             'class' => 'btn btn-danger',
@@ -35,6 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
 //            'answer',
             'IdCustomer',
+            [
+                'label' => 'Username',
+                'value' => User::findIdentity($model->IdCustomer)->getUsername(),
+            ],
             'IdAdmin',
             'created_at',
         ],
