@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,6 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
 //            'answer',
             'IdCustomer',
+            [
+                'label' => 'esm',
+                'value' => User::findIdentity($model->IdCustomer)->getUsername(),
+            ],
             'IdAdmin',
             'created_at',
         ],
