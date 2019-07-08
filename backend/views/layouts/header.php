@@ -234,7 +234,7 @@ use yii\helpers\Html;
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                         <span class="hidden-xs"><?=
-                            User::findIdentity(Yii::$app->user->getId())->getUsername();
+                            $user =  User::findIdentity(Yii::$app->user->getId())->getUsername();
 
 
                         ?></span>
@@ -246,7 +246,7 @@ use yii\helpers\Html;
                                  alt="User Image"/>
 
                             <p>
-                                Alexander Pierce - Web Developer
+                                <?= $user ?> - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
