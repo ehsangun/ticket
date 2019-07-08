@@ -8,6 +8,7 @@ use common\models\Ticket;
 use common\models\TicketSearch;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -71,7 +72,7 @@ class TicketController extends Controller
                 'dataProvider'=>$dataProvider,
             ]);
         } else if ($user->role == 'admin') {
-            $query = Ticket::find()->all();
+            $query = Ticket::find();
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
             ]);
