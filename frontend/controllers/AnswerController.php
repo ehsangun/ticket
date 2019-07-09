@@ -7,6 +7,8 @@ use common\models\User;
 use Yii;
 use common\models\Answer;
 use common\models\AnswerSearch;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,16 +39,41 @@ class AnswerController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AnswerSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $answers=$dataProvider;
         $newAnswer = new Answer();
 
+        $query=Answer::find()->where('IdTicket=' . Yii::$app->request->get('id'));
+        $answers=new ActiveDataProvider([
+            'query'=>$query,
+            'pagination'=>[
+                'pageSize'=>20
+            ],
+            'sort'=>[
+                'defaultOrder'=>[
+                    'created_at'=>SORT_ASC,
+                ]
+            ],
+        ]);
+
+
+        $newAnswer = new Answer();
+        $user=User::findIdentity(Yii::$app->user->getId());
+
+        $newAnswer->owner=$user->getUsername();
+        $newAnswer->created_at = date('Y-m-d H:i:s');
+        $newAnswer->IdTicket=Yii::$app->request->get('id');
+        $newAnswer->message=Yii::$app->request->post('message',' ');
+
+        if ($newAnswer->load(Yii::$app->request->post()) && $newAnswer->save()) {
+
+            $ticket = new Ticket();
+            $ticket = $ticket->getModel($newAnswer->IdTicket);
+            $ticket->isAnswered = false;
+            $ticket->save();
+        }
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'answers' => $answers->getModels(),
             'newAnswer'=>$newAnswer,
-
         ]);
     }
 

@@ -1,11 +1,8 @@
-
-
-
-
 <?php
 
 use common\models\Answer;
-use common\models\AnswerSearch;use yii\bootstrap\ActiveForm;
+use common\models\AnswerSearch;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -19,26 +16,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?php foreach ($answers as $answer){?>
+<?php foreach ($answers
 
-    <div class="card text-center">
+               as $answer){ ?>
+
+<div class="card text-center">
     <div class="owner-message ">
         <?php echo $answer->owner ?>:
     </div>
     <div class="message">
-        <?php echo $answer->message?>
+        <?php echo $answer->message ?>
     </div>
     <div class="created-at">
         created at:<?php echo $answer->created_at ?>
     </div>
-        <div>
+    <div>
 
-<?php }?>
-
-<!--            --><?php //echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>
-            <a href="?r=answer/create&id=<?php echo Yii::$app->request->get('id')?>" class="btn btn-success">answer</a>
-<div>
+        <?php } ?>
+<!--        <a href="?r=answer/create&id=--><?php //echo Yii::$app->request->get('id') ?><!--" class="btn btn-success">answer</a>-->
 
 
+        <?php $form =ActiveForm::begin(); ?>
+        <div class="card text-center">
+            <div class="card-header">
 
-</div>
+                <h1><?= $form->field($newAnswer, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h1>
+            </div>
+            <div class="card-footer bg-success">
+                <?= Html::submitButton('save', ['class' => 'btn btn-success ']) ?>
+            </div>
+        </div>
+<?php ActiveForm::end() ; ?>
