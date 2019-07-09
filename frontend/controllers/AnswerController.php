@@ -79,6 +79,8 @@ class AnswerController extends Controller
 
         $model->IdTicket=Yii::$app->request->get('id');
 
+        $model->message=Yii::$app->request->post('message',' ');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $ticket=new Ticket();

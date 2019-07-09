@@ -37,3 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="btn btn-success">
             <?php echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>
             </div>
+<div>
+
+
+
+</div>

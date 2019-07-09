@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Answer;
 use common\models\User;
 use Yii;
 use common\models\Ticket;
@@ -118,10 +119,11 @@ class TicketController extends Controller
             $model = new Ticket();
             $model->IdCustomer = Yii::$app->user->getId();
             date_default_timezone_set('Asia/tehran');
-            $model->created_at = date("Y/m/d-H:i");
+            $model->created_at = date("Y/m/d-H:m:s");
             if ($model->load(Yii::$app->request->post()) && $model->save())
             {
-                return $this->redirect(['ticket/index']);
+                return $this->redirect(['answer/create','id'=>$model->ID,'message'=>$model->description]);
+//                return $this->redirect(['ticket/index']);
             }
 
 

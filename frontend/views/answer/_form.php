@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 <div class="card text-center">
     <div class="card-header">
 
-        <h1><?= $form->field($model, 'message')->textarea(['maxlength' => true]) ?></h1>
+        <h1><?= $form->field($model, 'message')->textarea(['maxlength' => true,'value'=>Yii::$app->request->get('message'),]) ?></h1>
     </div>
     <div class="card-footer bg-success">
         <?= Html::submitButton('save', ['class' => 'btn btn-success ']) ?>
