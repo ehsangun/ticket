@@ -10,14 +10,12 @@ use yii\widgets\ListView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-    <div class="col-md-4 ">
+    <div class="col-md-4 border border-success">
             <div class="card text-center <?php if($model->isAnswered==1){?>border-danger<?php } ?>"style="margin-bottom: 5%">
             <div class="card-header <?php if($model->isAnswered==1){?>border-danger<?php } ?> "><?php echo $model->subject ;?> </div>
             <div class="product ">
-                <ul class="list-group bg-success">
-                    <li class="list-group-item <?php if($model->products==1){?>bg-success<?php }?>">p1</li>
-                    <li class="list-group-item <?php if($model->products==2){?>bg-success<?php }?>">p2</li>
-                    <li class="list-group-item <?php if($model->products==3){?>bg-success<?php }?>">p3</li>
+                <ul class="list-group ">
+                    <li class="list-group-item"><?php echo $model->products?></li>
                 </ul>
             </div>
             <div class="card-body ">
