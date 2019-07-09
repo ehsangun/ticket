@@ -35,10 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'subject',
             'products',
             'description',
+
 //            'IdCustomer',
 //            'IdAdmin',
 //            'created_at',
         ],
     ]) ?>
+
+
 
 </div>

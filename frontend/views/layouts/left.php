@@ -24,7 +24,7 @@ use dmstr\widgets\Menu;
                             echo $user->getUsername();
                         }
                          else { ?>
-                            <h3>مهمان</h3>
+                            <h3 class="text-primary">مهمان</h3>
                         <?php } ?>
 
 
