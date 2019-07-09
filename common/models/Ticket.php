@@ -16,6 +16,7 @@ use yii\web\NotFoundHttpException;
  * @property int $IdAdmin
  * @property string $created_at
  * @property string isAnswered
+ * @property string isClosed
  */
 class Ticket extends \yii\db\ActiveRecord
 {
@@ -35,7 +36,7 @@ class Ticket extends \yii\db\ActiveRecord
         return [
             [['subject', 'products', 'description'], 'required'],
             [['IdCustomer', 'IdAdmin'], 'integer'],
-            [['isAnswered'], 'boolean'],
+            [['isAnswered','isClosed'], 'boolean'],
             [['created_at'], 'safe'],
             [['subject', 'products'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 300],
@@ -56,6 +57,7 @@ class Ticket extends \yii\db\ActiveRecord
             'IdAdmin' => 'Id Admin',
             'created_at' => 'Created At',
             'isAnswered' => 'IsAnswered',
+            'isClosed' => 'IsClosed',
         ];
     }
     public function getModel($id){
@@ -64,5 +66,8 @@ class Ticket extends \yii\db\ActiveRecord
         }
 
 //        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function makeClosed(){
+        $this->isClosed=true;
     }
 }

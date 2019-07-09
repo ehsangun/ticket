@@ -61,13 +61,15 @@ class TicketController extends Controller
             $query = Ticket::find()->where('IdCustomer=' . Yii::$app->user->getId());
             $dataProvider = new ActiveDataProvider([
                 'query' => $query,
-                'pagination'=>[
-                    'pageSize'=>10,
+                'pagination' => [
+                    'pageSize' => 6,
                 ],
-                'sort'=>[
-                    'defaultOrder'=>[
-                    'isAnswered'=>SORT_DESC,
-                        'created_at'=>SORT_DESC,
+                'sort' => [
+                    'defaultOrder' => [
+                        'isClosed'=>SORT_ASC,
+                        'isAnswered' => SORT_DESC,
+                        'created_at' => SORT_DESC,
+
                     ]
                 ],
             ]);
@@ -76,7 +78,7 @@ class TicketController extends Controller
 
             return $this->render('index', [
                 'tickets' => $tickets,
-                'dataProvider'=>$dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         } else if ($user->role == 'admin') {
             $query = Ticket::find();
@@ -86,7 +88,7 @@ class TicketController extends Controller
             $tickets = $dataProvider->getModels();
             return $this->render('index', [
                 'tickets' => $tickets,
-                'dataProvider'=>$dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
 
@@ -120,9 +122,8 @@ class TicketController extends Controller
             $model->IdCustomer = Yii::$app->user->getId();
             date_default_timezone_set('Asia/tehran');
             $model->created_at = date("Y/m/d-H:m:s");
-            if ($model->load(Yii::$app->request->post()) && $model->save())
-            {
-                return $this->redirect(['answer/create','id'=>$model->ID,'message'=>$model->description]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['answer/create', 'id' => $model->ID, 'message' => $model->description]);
 //                return $this->redirect(['ticket/index']);
             }
 
@@ -183,6 +184,14 @@ class TicketController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionClose()
+    {
+        $ticket = Ticket::findOne(Yii::$app->request->get('id'));
+        $ticket->isClosed = true;
+        $ticket->save();
+        return $this->redirect('index.php?r=ticket/index');
     }
 }
 

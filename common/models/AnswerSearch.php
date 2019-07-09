@@ -41,7 +41,7 @@ class AnswerSearch extends Answer
      */
     public function search($params)
     {
-        $query = Answer::find()->where('IdTicket=' . Yii::$app->request->get('id'));;
+        $query = Answer::find()->where('IdTicket=' . Yii::$app->request->get('id'));
 
 
 

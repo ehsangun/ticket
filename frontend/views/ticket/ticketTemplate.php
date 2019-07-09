@@ -28,6 +28,7 @@ use yii\widgets\ListView;
 
                 <h1 class="card-footer <?php if($model->isAnswered==1){?>border-danger<?php } ?> ">
                     <?php  echo Html::a('answer',['answer/index','id'=>$model->ID])?>
+                    <?php  echo Html::a('close',['ticket/close','id'=>$model->ID])?>
                 </h1>
 
         </div>

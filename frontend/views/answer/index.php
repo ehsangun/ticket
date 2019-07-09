@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div>
 
 <?php }?>
-            <div class="btn btn-success">
-            <?php echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>
-            </div>
+
+<!--            --><?php //echo  Html::a('answer',['answer/create','id'=>Yii::$app->request->get('id')])?>
+            <a href="?r=answer/create&id=<?php echo Yii::$app->request->get('id')?>" class="btn btn-success">answer</a>
 <div>
 
 
