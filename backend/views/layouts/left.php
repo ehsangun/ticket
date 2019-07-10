@@ -1,6 +1,7 @@
 <?php
 
 use common\models\User;
+use yii\helpers\Html;
 
 ?>
 <aside class="main-sidebar">
@@ -40,7 +41,6 @@ use common\models\User;
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Ticket', 'icon' => 'file-code-o', 'url' => ['/ticket/index'],],
                     ['label' => 'Products', 'icon' => 'file-code-o', 'url' => ['/products/index'],],
-                    ['label' => 'Answer', 'icon' => 'file-code-o', 'url' => ['/answer/index'],],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Some tools',
