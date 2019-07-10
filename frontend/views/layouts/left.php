@@ -56,7 +56,7 @@ use dmstr\widgets\Menu;
                     ['label' => 'ساخت تیکت', 'icon' => 'file-code-o', 'url' => ['/ticket/create']],
                     ['label' => 'تیکت ها', 'icon' => 'dashboard', 'visible' => !Yii::$app->user->isGuest,'url' => ['/ticket/index']],
                     ['label' => 'ورود', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'ثبت نام ', 'url' => ['site/signUp'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'ثبت نام ', 'url' => ['site/signup'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'dev tools',
                         'icon' => 'share',

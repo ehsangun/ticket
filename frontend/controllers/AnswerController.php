@@ -59,6 +59,7 @@ class AnswerController extends Controller
         $user=User::findIdentity(Yii::$app->user->getId());
 
         $newAnswer->owner=$user->getUsername();
+        date_default_timezone_set('Asia/tehran');
         $newAnswer->created_at = date('Y-m-d H:i:s');
         $newAnswer->IdTicket=Yii::$app->request->get('id');
         $newAnswer->message=Yii::$app->request->post('message',' ');

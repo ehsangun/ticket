@@ -10,8 +10,8 @@ use yii\widgets\ListView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-    <div class="col-md-4 border border-success">
-            <div class="card text-center <?php if($model->isAnswered==1){?>border-danger<?php } ?>"style="margin-bottom: 5%">
+    <div class="col-md-4 border">
+            <div class="card text-center <?php if($model->isAnswered==1){?>border-danger<?php } ?>"style="margin: 5%">
             <div class="card-header <?php if($model->isAnswered==1){?>border-danger<?php } ?> "><?php echo $model->subject ;?> </div>
             <div class="product ">
                 <ul class="list-group ">
@@ -25,8 +25,8 @@ use yii\widgets\ListView;
             </div>
 
                 <h1 class="card-footer <?php if($model->isAnswered==1){?>border-danger<?php } ?> ">
-                    <?php  echo Html::a('answer',['answer/index','id'=>$model->ID])?>
-                    <?php  echo Html::a('close',['ticket/close','id'=>$model->ID])?>
+                   <div class="btn btn-success "> <?php  echo Html::a('answer',['answer/index','id'=>$model->ID])?></div>
+                    <div class="btn btn-danger "><?php  echo Html::a('close',['ticket/close','id'=>$model->ID])?></div>
                 </h1>
 
         </div>

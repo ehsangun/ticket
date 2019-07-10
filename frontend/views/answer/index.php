@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
 
         <?php } ?>
-<!--        <a href="?r=answer/create&id=--><?php //echo Yii::$app->request->get('id') ?><!--" class="btn btn-success">answer</a>-->
 
 
         <?php $form =ActiveForm::begin(); ?>
@@ -43,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1><?= $form->field($newAnswer, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h1>
             </div>
             <div class="card-footer bg-success">
-                <?= Html::submitButton('save', ['class' => 'btn btn-success ']) ?>
+                <?= Html::submitButton('send', ['class' => 'btn btn-success ']) ?>
             </div>
         </div>
 <?php ActiveForm::end() ; ?>
