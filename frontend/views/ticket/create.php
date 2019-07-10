@@ -1,9 +1,14 @@
 <?php
 
+use frontend\assets\AppAsset;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Ticket */
+
+
+
+frontend\assets\AppAsset::register($this);
 
 $this->title = 'Create Ticket';
 $this->params['breadcrumbs'][] = ['label' => 'Tickets', 'url' => ['index']];

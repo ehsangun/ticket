@@ -14,7 +14,37 @@ $this->title = 'Tickets';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?=  ListView::widget([
+<?//=  ListView::widget([
+//    'dataProvider' => $dataProvider,
+//    'itemView' => 'ticketTemplate',
+//]);?>
+
+<?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'itemView' => 'ticketTemplate',
-]);?>
+    //'filterModel' => $searchModel,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+
+//        'ID',
+        'subject',
+        'products',
+        'description',
+        //'answer',
+        //'IdCustomer',
+        //'IdAdmin',
+        'created_at',
+//        'isAnswered',
+        [
+            'label' => 'situation',
+            'format' => 'raw',
+            'value' => function ($data) {
+                if($data->isAnswered==false) {
+                    return Html::a('isAnswered', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-success']);
+                }
+                else{
+                    return Html::a('isAnswered', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-danger']);
+                }
+            },
+        ],
+    ],
+]); ?>
