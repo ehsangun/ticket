@@ -87,7 +87,7 @@ class AnswerController extends Controller
         $ticket->isAnswered=true;
         $ticket->save();
 
-            return $this->redirect(['view', 'id' => $model->Id]);
+            return $this->redirect(['index', 'id' => $model->IdTicket]);
         }
 
         return $this->render('create', [
