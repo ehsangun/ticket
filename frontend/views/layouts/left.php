@@ -1,38 +1,21 @@
 <?php
 
-use common\models\User;
-use dmstr\widgets\Menu;
+use yii\helpers\Html;
 
 ?>
-<aside class="main-sidebar ">
+<aside class="main-sidebar">
 
     <section class="sidebar">
 
         <!-- Sidebar user panel -->
-
         <div class="user-panel">
             <div class="pull-left image">
-                <?php if(!Yii::$app->user->isGuest) {?>
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>
-                    <?php
+                <p>Alexander Pierce</p>
 
-                            $userId = Yii::$app->user->getId();
-                            $user = User::findOne($userId);
-                            echo $user->getUsername();
-                        }
-                         else { ?>
-                            <h3 class="text-primary">مهمان</h3>
-                        <?php } ?>
-
-
-
-
-                </p>
-
-<!--                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>-->
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
@@ -52,13 +35,13 @@ use dmstr\widgets\Menu;
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
-//                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'ساخت تیکت', 'icon' => 'file-code-o', 'url' => ['/ticket/create']],
-                    ['label' => 'تیکت ها', 'icon' => 'dashboard', 'visible' => !Yii::$app->user->isGuest,'url' => ['/ticket/index']],
+                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => 'ارسال تیکت', 'icon' => 'dashboard', 'url' => ['ticket/create']],
+                    ['label' => 'تیکت ها', 'icon' => 'dashboard', 'url' => ['ticket/index']],
                     ['label' => 'ورود', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'ثبت نام ', 'url' => ['site/signup'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'خروج', 'url' => ['site/logout'], 'visible' => !Yii::$app->user->isGuest],
                     [
-                        'label' => 'dev tools',
+                        'label' => 'Some tools',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
@@ -86,7 +69,6 @@ use dmstr\widgets\Menu;
                 ],
             ]
         ) ?>
-
 
     </section>
 

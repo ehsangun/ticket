@@ -5,14 +5,20 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+frontend\assets\AppAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model common\models\Ticket */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
+
+
+
+
 <div class="">
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 pull-right">
             <div class="card border-primary text-center">
                 <div class="card-header"><?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?></div>
                 <div class="product">
