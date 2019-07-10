@@ -39,10 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw',
             'value' => function ($data) {
                 if($data->isAnswered==false) {
-                    return Html::a('isAnswered', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-success']);
+                    return Html::a('در انتطار', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-warning disabled']);
                 }
                 else{
-                    return Html::a('isAnswered', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-danger']);
+                    return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-success']);
                 }
             },
         ],
