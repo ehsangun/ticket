@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('this id ticket is : '.Yii::$app->request->get('id')) ?></h1>
 
     <p>
         <?= Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')], ['class' => 'btn btn-success']) ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'Id',
             'message',
             'owner',
-            'IdTicket',
+            //'IdTicket',
             'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
