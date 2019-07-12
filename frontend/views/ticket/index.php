@@ -38,11 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => 'situation',
             'format' => 'raw',
             'value' => function ($data) {
-                if($data->isAnswered==false) {
-                    return Html::a('در انتطار', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-warning disabled']);
+                if($data->isClosed==false) {
+                    if ($data->isAnswered == false) {
+                        return Html::a('در انتطار', ['answer/index', 'id' => $data->ID], ['class' => 'btn btn-warning disabled']);
+                    } else {
+                        return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID,], ['class' => 'btn btn-success', 'data-method' => 'POST']);
+                    }
                 }
                 else{
-                    return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID,],['class'=>'btn btn-success','data-method'=>'POST']);
+                    return Html::a('بسته شده', ['answer/index','id'=>$data->ID], ['class' => 'btn btn-danger']);
+
                 }
             },
         ],

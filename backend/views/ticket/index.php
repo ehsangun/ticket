@@ -40,13 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Situation',
                 'format' => 'raw',
                 'value'=>function ($data) {
-                    if ($data->isAnswered == 0){
-                        return Html::a('Answer', ['/answer/index','id'=>$data->ID], ['class' => 'btn btn-danger','data-method' => 'POST']);
+                    if ($data->isClosed == false) {
+                        if ($data->isAnswered == 0) {
+                            return Html::a('Answer', ['/answer/index', 'id' => $data->ID], ['class' => 'btn btn-danger', 'data-method' => 'POST']);
 
-                    }else {
-                        return Html::a('Answer', ['/answer/index', 'id' => $data->ID], ['class' => 'btn btn-success','data-method' => 'POST']);
+                        } else {
+                            return Html::a('Answer', ['/answer/index', 'id' => $data->ID], ['class' => 'btn btn-success', 'data-method' => 'POST']);
+                        }
                     }
-                    },
+                else{
+                        return Html::a('بسته شده', ['/answer/index','id'=>$data->ID], ['class' => 'btn btn-danger']);
+                    }
+                }
             ],
             ['class' => 'yii\grid\ActionColumn'],
         ],

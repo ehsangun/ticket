@@ -2,6 +2,7 @@
 
 use common\models\Answer;
 use common\models\AnswerSearch;
+use common\models\Ticket;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -16,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
-<?php foreach ($answers
-
-               as $answer){ ?>
+<?php foreach ($answers as $answer){ ?>
 
 <div class="card text-center">
     <div class="owner-message ">
@@ -33,16 +32,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
 
         <?php } ?>
-
-
-        <?php $form =ActiveForm::begin(); ?>
+        <?php
+        $ticket=Ticket::findOne(Yii::$app->request->get('id'));
+        if(!$ticket->isClosed==true){
+        $form =ActiveForm::begin();
+        ?>
         <div class="card text-center">
             <div class="card-header">
 
                 <h1><?= $form->field($newAnswer, 'message')->textarea(['maxlength' => true, 'value' => Yii::$app->request->get('message'),]) ?></h1>
             </div>
             <div class="card-footer bg-success">
-                <?= Html::submitButton('send', ['class' => 'btn btn-success ']) ?>
+                <?php
+                echo Html::submitButton('ارسال پیام', ['class' => 'btn btn-success']);
+                echo  Html::a('بستن تیکت',['ticket/close','IdTicket'=>Yii::$app->request->get('id')],['class'=>'btn btn-danger'])
+
+                ?>
+
             </div>
         </div>
-<?php ActiveForm::end() ; ?>
+<?php ActiveForm::end() ; ?><?php } ?>
+
