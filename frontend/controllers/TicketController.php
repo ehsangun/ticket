@@ -43,6 +43,7 @@ class TicketController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+
                 ],
             ],
         ];

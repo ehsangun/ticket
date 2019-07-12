@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a('در انتطار', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-warning disabled']);
                 }
                 else{
-                    return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID],['class'=>'btn btn-success']);
+                    return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID,],['class'=>'btn btn-success','data-method'=>'POST']);
                 }
             },
         ],

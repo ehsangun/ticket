@@ -39,7 +39,7 @@ use yii\helpers\Html;
                     ['label' => 'ارسال تیکت', 'icon' => 'dashboard', 'url' => ['ticket/create']],
                     ['label' => 'تیکت ها', 'icon' => 'dashboard', 'url' => ['ticket/index']],
                     ['label' => 'ورود', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'خروج', 'url' => ['site/logout'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'خروج', 'url' =>['site/logout'], 'visible' => !Yii::$app->user->isGuest],
                     [
                         'label' => 'Some tools',
                         'icon' => 'share',

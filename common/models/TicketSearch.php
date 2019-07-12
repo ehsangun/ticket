@@ -50,7 +50,7 @@ class TicketSearch extends Ticket
             $query->where('IdCustomer=' . Yii::$app->user->getId());
         }
         else if($user->role=='admin'){
-            $query = Ticket::find();
+            $query = Ticket::find()->where(['OR','IdAdmin='.$user->id,'IdAdmin=0']);
 
         }
 

@@ -85,6 +85,9 @@ class AnswerController extends Controller
         $ticket=new Ticket();
         $ticket = $ticket->getModel($model->IdTicket);
         $ticket->isAnswered=true;
+        if($user->role=='admin'){
+            $ticket->IdAdmin=$user->id;
+        }
         $ticket->save();
 
             return $this->redirect(['index', 'id' => $model->IdTicket]);
