@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Ticket;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -15,7 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode('this id ticket is : '.Yii::$app->request->get('id')) ?></h1>
 
     <p>
-        <?= Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')], ['class' => 'btn btn-success']) ?>
+        <?php
+            $ticket=Ticket::findOne(Yii::$app->request->get('id'));
+            if($ticket->isClosed==true){
+                echo  Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')],['class'=>'btn btn-success disabled']);
+             }
+            else{
+                echo Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')],['class'=>'btn btn-success']);
+            }
+                ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

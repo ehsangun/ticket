@@ -43,6 +43,7 @@ class TicketController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+
                 ],
             ],
         ];
@@ -189,7 +190,7 @@ class TicketController extends Controller
 //
     public function actionClose()
     {
-        $ticket = Ticket::findOne(Yii::$app->request->get('id'));
+        $ticket = Ticket::findOne(Yii::$app->request->get('IdTicket'));
         $ticket->isClosed = true;
         $ticket->save();
         return $this->redirect('index.php?r=ticket/index');
