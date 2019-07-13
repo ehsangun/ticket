@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'message')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'message')->textarea(['maxlength' => true]) ?>
     <?php $form->field($model, 'IdTicket')->textInput(['maxlength' => true]) ?>
 
 

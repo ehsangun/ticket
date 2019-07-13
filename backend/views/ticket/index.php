@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     }
                 else{
-                        return Html::a('بسته شده', ['/answer/index','id'=>$data->ID], ['class' => 'btn btn-danger']);
+                        return Html::a('بسته شده', ['/answer/index','id'=>$data->ID], ['class' => 'btn btn-default']);
                     }
                 }
             ],
