@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
     }
     .admin {
         border-radius: 5px;
-
         background-color: #94C2ED;
         margin-bottom: 3px;
         padding: 10px;
