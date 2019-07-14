@@ -1,49 +1,76 @@
 <?php
 
+use common\models\Answer;
+use common\models\AnswerSearch;
 use common\models\Ticket;
+use common\models\User;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AnswerSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
+/* @var $answers yii\data\ActiveDataProvider */
+/* @var $newAnswer common\models\AnswerSearch */
+/* @var $model common\models\Answer */
 $this->title = 'Answers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="answer-index">
 
-    <h1><?= Html::encode('this id ticket is : '.Yii::$app->request->get('id')) ?></h1>
-
     <p>
         <?php
             $ticket=Ticket::findOne(Yii::$app->request->get('id'));
             if($ticket->isClosed==true){
-                echo  Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')],['class'=>'btn btn-success disabled']);
+                $this->title = 'Answers is closed';
              }
             else{
-                echo Html::a('Create Answer', ['create','id'=>Yii::$app->request->get('id')],['class'=>'btn btn-success']);
+                $this->title = 'Answers';
             }
                 ?>
     </p>
+<style>
+    .userMessage{
+        border-radius: 5px;
+        background-color: #86BB71;
+        margin-bottom: 3px;
+        padding: 10px;
+    }
+    .admin {
+        border-radius: 5px;
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        background-color: #94C2ED;
+        margin-bottom: 3px;
+        padding: 10px;
+    }
+    .pn{
+        text-align: right;
+        color: grey;
+    }
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+</style>
+    <?php foreach ($answers as $answer){ ?>
+<div class="<?php if (User::findByUsername($answer->owner)->role == "customer"){echo 'userMessage';}else{echo 'admin';} ?>">
+    <?= $answer->message ?>
+    <div class="pn"><code><?= $answer->owner." [ ".$answer->created_at." ]"?></code></div>
+</div>
 
-            'Id',
-            'message',
-            'owner',
-            //'IdTicket',
-            'created_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
 
+
+            <?php } ?>
+
+
+</div>
+<div class="answer-create">
+
+
+    <?php
+    if($ticket->isClosed==false) {
+        echo $this->render('_form', [
+            'model' => $model,
+        ]);
+    }?>
 
 </div>
