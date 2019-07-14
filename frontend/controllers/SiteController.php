@@ -77,6 +77,7 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+
     /**
      * Logs in a user.
      *

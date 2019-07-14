@@ -40,14 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function ($data) {
                 if($data->isClosed==false) {
                     if ($data->isAnswered == false) {
-                        return Html::a('در انتطار', ['answer/index', 'id' => $data->ID], ['class' => 'btn btn-warning disabled']);
+                        return Html::a('در انتطار', ['answer/index', 'id' => $data->ID], ['class' => 'btn btn-warning']);
                     } else {
                         return Html::a('جواب داری!', ['answer/index', 'id' => $data->ID,], ['class' => 'btn btn-success', 'data-method' => 'POST']);
                     }
                 }
                 else{
-                    return Html::a('بسته شده', ['answer/index','id'=>$data->ID], ['class' => 'btn btn-danger']);
-
+                    return Html::a('بسته شده', ['answer/index','id'=>$data->ID], ['class' => 'btn btn-default']);
                 }
             },
         ],
